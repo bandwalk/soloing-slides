@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모두의 AI - 모바일 프로토타입 (Kanana 스페셜 B2C 실사 버전)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #0f172a;
+        }
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.3);
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen py-10 px-4">
+
+    <!-- Title and Subtitle -->
+    <div class="text-center mb-8">
+        <h1 class="text-white text-3xl font-extrabold mb-2 tracking-tight">📱 모두의 AI × Kanana (카나나)</h1>
+        <p class="text-slate-400 text-sm max-w-lg">카카오 고유 AI 브랜드 <b>Kanana 공식 대표 색상(핫핑크 #FF2D78 & 퍼플 #6E24FF)</b>이 결합된<br>대국민 체감형 모바일 리얼 대화(Colloquial B2C Conversation) 프로토타입 데모입니다.</p>
+    </div>
+
+    <!-- Main Container -->
+    <div class="flex flex-col lg:flex-row gap-8 items-center justify-center w-full max-w-5xl">
+        
+        <!-- Left Side Controls / Description -->
+        <div class="w-full lg:w-1/3 bg-slate-800/80 p-6 rounded-2xl border border-slate-700/50 text-white space-y-6">
+            <div>
+                <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-xs font-semibold">B2C 리얼 모바일 대화</span>
+                <h3 class="text-xl font-bold mt-3 text-slate-100">체험형 프로토타입 시나리오</h3>
+                <p class="text-slate-400 text-sm mt-2 leading-relaxed">
+                    실제 모바일 카카오톡 및 카나나 메신저에서 사용하는 구어체와 친밀한 비서 톤으로 각색하였습니다.
+                </p>
+            </div>
+            
+            <div class="space-y-4">
+                <button onclick="switchScenario('gov')" id="btn-gov" class="w-full text-left p-3 rounded-xl bg-pink-600/90 border border-pink-500 text-white font-medium text-sm flex items-center gap-3 transition shadow-lg shadow-pink-500/10">
+                    <span class="p-2 bg-white/10 rounded-lg">🏛️</span>
+                    <div>
+                        <p class="font-bold">시나리오 1</p>
+                        <p class="text-xs text-pink-200">AI 국민비서 × 민원24 행정</p>
+                    </div>
+                </button>
+
+                <button onclick="switchScenario('local')" id="btn-local" class="w-full text-left p-3 rounded-xl bg-slate-700/50 hover:bg-slate-700 border border-slate-600/50 text-slate-300 font-medium text-sm flex items-center gap-3 transition">
+                    <span class="p-2 bg-white/5 rounded-lg">🏪</span>
+                    <div>
+                        <p class="font-bold">시나리오 2</p>
+                        <p class="text-xs text-slate-400">playmcp 골목상권 단골 연동</p>
+                    </div>
+                </button>
+            </div>
+
+            <div class="border-t border-slate-700/50 pt-4 text-xs text-slate-400 space-y-2">
+                <p>🌸 <b>카나나(Kanana)</b>의 공식 브랜드 컬러셋이 이식된 스마트폰 디자인입니다.</p>
+                <p>🌸 우측 상단 탭을 통해 <b>Kanana(나나/카나)</b> 테마와 타사 모델 테마를 즉시 비교 스위칭해볼 수 있습니다.</p>
+                <p>🌸 화면 안의 노란색/분홍색 버튼들은 실제 <b>상호작용(클릭)</b>이 작동합니다.</p>
+            </div>
+        </div>
+
+        <!-- Right Side: Realistic Mobile Mockup Frame -->
+        <div id="phone-mockup" class="relative mx-auto bg-black rounded-[48px] p-4 shadow-2xl border-4 border-slate-700 ring-1 ring-slate-800" style="width: 380px; height: 780px;">
+            
+            <!-- Speaker & Camera Dynamic Island -->
+            <div class="absolute top-6 left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-full z-50 flex items-center justify-between px-3">
+                <div class="w-3 h-3 bg-neutral-900 rounded-full"></div>
+                <div class="w-12 h-1 bg-neutral-800 rounded-full"></div>
+            </div>
+
+            <!-- Screen Container -->
+            <div id="phone-screen" class="w-full h-full rounded-[38px] overflow-hidden flex flex-col relative transition-all duration-300 bg-[#f8f9fa] text-slate-900">
+                
+                <!-- Status Bar -->
+                <div class="h-10 flex items-center justify-between px-6 pt-3 text-xs font-semibold z-40" id="status-bar">
+                    <span id="status-time">09:41</span>
+                    <div class="flex items-center gap-1.5">
+                        <span>5G</span>
+                        <div class="w-5 h-2.5 border border-current rounded-sm p-0.5 flex items-center">
+                            <div class="bg-current h-full w-full rounded-2xs"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App Header -->
+                <div id="app-header" class="px-4 py-3 flex items-center justify-between border-b border-slate-200/80 bg-white/95 backdrop-blur z-30">
+                    <div class="flex items-center gap-2">
+                        <!-- Custom Kanana Gradient Logo Bubble -->
+                        <div id="bot-logo" class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#6E24FF] to-[#FF2D78] flex items-center justify-center text-white text-[10px] font-bold shadow-sm">
+                            K
+                        </div>
+                        <div>
+                            <h4 id="bot-name" class="font-bold text-sm text-slate-900">Kanana (카나나)</h4>
+                            <span id="bot-status" class="text-[10px] text-pink-500 flex items-center gap-1 font-semibold">
+                                <span class="w-1.5 h-1.5 rounded-full bg-pink-500 inline-block animate-pulse"></span>
+                                AI 에이전트 가동 중 (playmcp)
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Theme Selector inside App (Kanana Pink Highlighted) -->
+                    <div class="flex bg-slate-100 p-0.5 rounded-lg text-[9px] font-bold border border-slate-200">
+                        <button onclick="setTheme('kanana')" id="theme-kn" class="px-2 py-1 rounded-md bg-gradient-to-r from-[#6E24FF] to-[#FF2D78] text-white shadow-sm transition">Kanana</button>
+                        <button onclick="setTheme('chatgpt')" id="theme-gpt" class="px-2 py-1 rounded-md text-slate-500 transition">GPT</button>
+                        <button onclick="setTheme('gemini')" id="theme-gem" class="px-2 py-1 rounded-md text-slate-500 transition">Gemini</button>
+                    </div>
+                </div>
+
+                <!-- Chat Feed Scroll Area -->
+                <div id="chat-feed" class="flex-1 overflow-y-auto px-4 py-4 space-y-4 text-sm">
+                    
+                    <!-- Welcome Toast -->
+                    <div id="welcome-toast" class="text-center py-2 px-4 bg-pink-50/80 border border-pink-100/50 text-pink-800 text-[11px] rounded-xl leading-relaxed">
+                        🌸 <b>paulo 부사장님의 AI 에이전트 카나나입니다.</b><br>AI 국민비서 행정 대행 및 골목 상권 연결이 준비되었습니다.
+                    </div>
+
+                    <!-- Conversation Container -->
+                    <div id="conversation-box" class="space-y-4">
+                        <!-- Content will be injected dynamically -->
+                    </div>
+
+                </div>
+
+                <!-- Input Area -->
+                <div id="input-container" class="p-3 bg-white border-t border-pink-100/40 flex items-center gap-2">
+                    <div class="flex-1 bg-slate-50 rounded-2xl px-4 py-2.5 flex items-center justify-between border border-pink-100/30">
+                        <input type="text" readonly id="fake-input" value="나 종부세 얼마나 나왔어? 확인하고 주민등록등본도 같이 떼줄래?" class="bg-transparent text-xs text-slate-500 outline-none w-full">
+                        <button class="text-slate-400">
+                            🎤
+                        </button>
+                    </div>
+                    <button id="send-btn" onclick="triggerAction()" class="w-9 h-9 bg-gradient-to-tr from-[#6E24FF] to-[#FF2D78] rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md hover:scale-105 transition">
+                        ➔
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script for interactive controls -->
+    <script>
+        let currentTheme = 'kanana';
+        let currentScenario = 'gov';
+
+        // Conversations data
+        const scenarios = {
+            gov: [
+                {
+                    role: 'user',
+                    text: '나 이번 달 종부세 얼마나 나왔어? 확인하고 주민등록등본도 같이 한 장 떼줄래?'
+                },
+                {
+                    role: 'bot',
+                    text: '네, <b>paulo님!</b> 이번 달 종합부동산세 고지 내역을 AI 국민비서에서 <b>샥- 긁어왔어요!</b> 🏛️<br>그리고 주민등록등본 발급도 민원24(정부24) 세션에 안전하게 대기 대령해 놓았답니다. 아래 버튼을 누르고 카카오페이로 <b>슥- 인증만 하시면</b> 즉시 발급 완료돼요! 😉',
+                    card: `
+                        <div class="bg-white rounded-xl p-3 border border-pink-100/60 shadow-sm space-y-3">
+                            <div class="flex items-center gap-2 pb-2 border-b border-pink-50/50">
+                                <span class="text-lg">🏛️</span>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-800">AI 국민비서 행정 분석 (Kanana)</p>
+                                    <p class="text-[10px] text-pink-500 font-semibold">민원24(정부24) 세션 대기 중</p>
+                                </div>
+                            </div>
+                            <div class="space-y-1 text-xs">
+                                <div class="flex justify-between"><span class="text-slate-500">종합부동산세 고지액</span><span class="font-bold text-[#FF2D78]">254,000원</span></div>
+                                <div class="flex justify-between"><span class="text-slate-500">납부 기한</span><span class="font-medium">2026. 06. 30 까지</span></div>
+                                <div class="flex justify-between"><span class="text-slate-500">발급 서류</span><span class="font-medium">주민등록등본 1부</span></div>
+                            </div>
+                            <button onclick="runGovAction()" class="w-full py-2 bg-gradient-to-r from-[#6E24FF] to-[#FF2D78] hover:opacity-90 text-white font-bold rounded-lg text-xs transition shadow-sm flex items-center justify-center gap-2">
+                                🟡 카카오페이로 인증 및 등본 즉시 발급하기
+                            </button>
+                        </div>
+                    `
+                }
+            ],
+            local: [
+                {
+                    role: 'user',
+                    text: '내일 단골 미용실 예약 좀 잡아줘. 그리고 백양 세탁소에 이불 빨래 수거 호출도 같이 좀 해주고!'
+                },
+                {
+                    role: 'bot',
+                    text: '네, <b>paulo님!</b> 카카오 <b>playmcp</b> 플랫폼을 통해 단골 상점 일정을 빠르게 파악했어요! 💈🧺<br>미용실은 내일 오전 11시가 딱 비어 있고, 세탁소는 내일 오후 2시에 방문 가능하대요. 아래 버튼을 눌러 예약을 <b>톡- 확정해 보세요!</b>',
+                    card: `
+                        <div class="bg-white rounded-xl p-3 border border-pink-100/60 shadow-sm space-y-3">
+                            <div class="flex items-center gap-2 pb-2 border-b border-pink-50/50">
+                                <span class="text-lg">🏪</span>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-800">playmcp 골목상권 상생망</p>
+                                    <p class="text-[10px] text-pink-500 font-semibold">동네 단골 소상공인 실시간 연결</p>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs">
+                                <div class="p-2 bg-slate-50 rounded-lg">
+                                    <p class="font-bold text-slate-800">💈 헤어스튜디오 아우라 (단골 미용실)</p>
+                                    <p class="text-[#6E24FF] text-[10px] font-semibold mt-0.5">내일(6/24) 오전 11:00 예약 가능</p>
+                                </div>
+                                <div class="p-2 bg-slate-50 rounded-lg">
+                                    <p class="font-bold text-slate-800">🧺 백양 세탁소 (단골 세탁소)</p>
+                                    <p class="text-[#6E24FF] text-[10px] font-semibold mt-0.5">내일(6/24) 오후 14:00 수거 방문 접수</p>
+                                </div>
+                            </div>
+                            <button onclick="runLocalAction()" class="w-full py-2 bg-gradient-to-r from-[#6E24FF] to-[#FF2D78] hover:opacity-90 text-white font-bold rounded-lg text-xs transition shadow-sm">
+                                🎫 미용실 예약 및 세탁물 수거 확정하기
+                            </button>
+                        </div>
+                    `
+                }
+            ]
+        };
+
+        // Switch scenario
+        function switchScenario(scenario) {
+            currentScenario = scenario;
+            
+            // Update left sidebar buttons
+            const btnGov = document.getElementById('btn-gov');
+            const btnLocal = document.getElementById('btn-local');
+            const fakeInput = document.getElementById('fake-input');
+
+            if (scenario === 'gov') {
+                btnGov.className = "w-full text-left p-3 rounded-xl bg-pink-600/90 border border-pink-500 text-white font-medium text-sm flex items-center gap-3 transition shadow-lg shadow-pink-500/10";
+                btnLocal.className = "w-full text-left p-3 rounded-xl bg-slate-700/50 hover:bg-slate-700 border border-slate-600/50 text-slate-300 font-medium text-sm flex items-center gap-3 transition";
+                fakeInput.value = "나 종부세 얼마나 나왔어? 확인하고 등본도 같이 떼줘";
+            } else {
+                btnLocal.className = "w-full text-left p-3 rounded-xl bg-pink-600/90 border border-pink-500 text-white font-medium text-sm flex items-center gap-3 transition shadow-lg shadow-pink-500/10";
+                btnGov.className = "w-full text-left p-3 rounded-xl bg-slate-700/50 hover:bg-slate-700 border border-slate-600/50 text-slate-300 font-medium text-sm flex items-center gap-3 transition";
+                fakeInput.value = "내일 단골 미용실 예약 좀 하고 이불 수거 호출해줘";
+            }
+
+            renderConversation();
+        }
+
+        // Action Buttons interactives
+        function runGovAction() {
+            alert("✅ [카카오페이 인증 완료]\n주민등록등본 발급 신청이 완료되었습니다! PDF 서류 원본이 톡캘린더 안심 보관소에 안전하게 연동되었습니다. 🏛️");
+        }
+
+        function runLocalAction() {
+            alert("✅ [골목상권 상생 예약 완료]\n미용실 6/24 11시 예약 확정 및 세탁소 방문 수거 접수가 성공적으로 확정되었습니다. 카카오톡 알림톡으로 바우처가 발송됩니다. 🧺");
+        }
+
+        // Custom scenario injector for automated screenshots
+        function loadCustomScenario(userText, botText, cardTitle, cardSub, cardDetails, buttonText) {
+            scenarios.custom = [
+                {
+                    role: 'user',
+                    text: userText
+                },
+                {
+                    role: 'bot',
+                    text: botText,
+                    card: `
+                        <div class="bg-white rounded-xl p-3 border border-pink-100/60 shadow-sm space-y-3">
+                            <div class="flex items-center gap-2 pb-2 border-b border-pink-50/50">
+                                <span class="text-lg">✨</span>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-800">${cardTitle}</p>
+                                    <p class="text-[10px] text-pink-500 font-semibold">${cardSub}</p>
+                                </div>
+                            </div>
+                            <div class="space-y-1 text-xs">
+                                ${cardDetails}
+                            </div>
+                            <button class="w-full py-2 bg-gradient-to-r from-[#6E24FF] to-[#FF2D78] text-white font-bold rounded-lg text-xs transition shadow-sm flex items-center justify-center gap-2">
+                                ${buttonText}
+                            </button>
+                        </div>
+                    `
+                }
+            ];
+            currentScenario = 'custom';
+            document.getElementById('fake-input').value = userText;
+            renderConversation();
+        }
+
+        // Set theme
+        function setTheme(theme) {
+            currentTheme = theme;
+            const screen = document.getElementById('phone-screen');
+            const statusBar = document.getElementById('status-bar');
+            const appHeader = document.getElementById('app-header');
+            const inputContainer = document.getElementById('input-container');
+            const botLogo = document.getElementById('bot-logo');
+            const botName = document.getElementById('bot-name');
+            const botStatus = document.getElementById('bot-status');
+            const sendBtn = document.getElementById('send-btn');
+            const welcomeToast = document.getElementById('welcome-toast');
+
+            // Reset tab button states
+            document.getElementById('theme-kn').className = "px-2 py-1 rounded-md text-slate-500 transition";
+            document.getElementById('theme-gpt').className = "px-2 py-1 rounded-md text-slate-500 transition";
+            document.getElementById('theme-gem').className = "px-2 py-1 rounded-md text-slate-500 transition";
+
+            if (theme === 'kanana') {
+                document.getElementById('theme-kn').className = "px-2 py-1 rounded-md bg-gradient-to-r from-[#6E24FF] to-[#FF2D78] text-white shadow-sm font-bold transition";
+                screen.className = "w-full h-full rounded-[38px] overflow-hidden flex flex-col relative transition-all duration-300 bg-[#fbf5f7] text-slate-900";
+                statusBar.className = "h-10 flex items-center justify-between px-6 pt-3 text-xs font-semibold z-40 text-slate-900 bg-[#fbf5f7]";
+                appHeader.className = "px-4 py-3 flex items-center justify-between border-b border-pink-100 bg-white z-30";
+                inputContainer.className = "p-3 bg-white border-t border-pink-50/50 flex items-center gap-2";
+                botLogo.className = "w-8 h-8 rounded-full bg-gradient-to-tr from-[#6E24FF] to-[#FF2D78] flex items-center justify-center text-white text-[10px] font-bold shadow-sm";
+                botLogo.innerHTML = "K";
+                botName.innerHTML = "Kanana (카나나)";
+                botStatus.className = "text-[10px] text-pink-500 flex items-center gap-1 font-semibold";
+                botStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-pink-500 inline-block animate-pulse"></span> AI 에이전트 가동 중 (playmcp)';
+                welcomeToast.className = "text-center py-2 px-4 bg-pink-50/80 border border-pink-100/50 text-pink-800 text-[11px] rounded-xl leading-relaxed";
+                welcomeToast.innerHTML = "🌸 <b>paulo 부사장님의 AI 에이전트 카나나입니다.</b><br>AI 국민비서 행정 대행 및 골목 상권 연결이 준비되었습니다.";
+                sendBtn.className = "w-9 h-9 bg-gradient-to-tr from-[#6E24FF] to-[#FF2D78] rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md hover:scale-105 transition";
+            } else if (theme === 'chatgpt') {
+                document.getElementById('theme-gpt').className = "px-2 py-1 rounded-md bg-slate-900 text-white shadow-sm font-bold transition";
+                screen.className = "w-full h-full rounded-[38px] overflow-hidden flex flex-col relative transition-all duration-300 bg-white text-slate-900";
+                statusBar.className = "h-10 flex items-center justify-between px-6 pt-3 text-xs font-semibold z-40 text-slate-900 bg-white";
+                appHeader.className = "px-4 py-3 flex items-center justify-between border-b border-slate-100 bg-white z-30";
+                inputContainer.className = "p-3 bg-white border-t border-slate-100 flex items-center gap-2";
+                botLogo.className = "w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center text-white text-xs font-bold";
+                botLogo.innerHTML = "GPT";
+                botName.innerHTML = "모두의 AI (ChatGPT)";
+                botStatus.className = "text-[10px] text-slate-500 flex items-center gap-1";
+                botStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span> playmcp 가동 중';
+                welcomeToast.className = "text-center py-2 px-4 bg-slate-50 border border-slate-200 text-slate-800 text-[11px] rounded-xl leading-relaxed";
+                welcomeToast.innerHTML = "✨ <b>paulo 부사장님 환영합니다.</b><br>AI 국민비서 행정 대행 및 골목 상권 연결이 준비되었습니다.";
+                sendBtn.className = "w-9 h-9 bg-slate-900 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md hover:scale-105 transition";
+            } else if (theme === 'gemini') {
+                document.getElementById('theme-gem').className = "px-2 py-1 rounded-md bg-blue-600 text-white shadow-sm font-bold transition";
+                screen.className = "w-full h-full rounded-[38px] overflow-hidden flex flex-col relative transition-all duration-300 bg-[#f0f4f9] text-slate-900";
+                statusBar.className = "h-10 flex items-center justify-between px-6 pt-3 text-xs font-semibold z-40 text-slate-900 bg-[#f0f4f9]";
+                appHeader.className = "px-4 py-3 flex items-center justify-between border-b border-blue-100 bg-[#f0f4f9]/90 backdrop-blur z-30";
+                inputContainer.className = "p-3 bg-[#f0f4f9] border-t border-blue-100 flex items-center gap-2";
+                botLogo.className = "w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 flex items-center justify-center text-white text-[10px] font-bold";
+                botLogo.innerHTML = "✦";
+                botName.innerHTML = "모두의 AI (Gemini)";
+                botStatus.className = "text-[10px] text-blue-500 flex items-center gap-1 font-semibold";
+                botStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-blue-500 inline-block animate-pulse"></span> playmcp 가동 중';
+                welcomeToast.className = "text-center py-2 px-4 bg-blue-50 border border-blue-100 text-blue-800 text-[11px] rounded-xl leading-relaxed";
+                welcomeToast.innerHTML = "✨ <b>paulo 부사장님 환영합니다.</b><br>AI 국민비서 행정 대행 및 골목 상권 연결이 준비되었습니다.";
+                sendBtn.className = "w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md hover:scale-105 transition";
+            }
+
+            renderConversation();
+        }
+
+        // Render messages
+        function renderConversation() {
+            const container = document.getElementById('conversation-box');
+            container.innerHTML = '';
+            
+            const messages = scenarios[currentScenario];
+            
+            messages.forEach((msg) => {
+                const isUser = msg.role === 'user';
+                const wrapper = document.createElement('div');
+                wrapper.className = isUser ? "flex justify-end" : "flex flex-col gap-2";
+                
+                let textStyle = "";
+                if (isUser) {
+                    textStyle = "bg-slate-900 text-white rounded-2xl rounded-tr-none px-4 py-2.5 max-w-[85%] text-xs shadow-sm";
+                    if (currentTheme === 'kanana') {
+                        textStyle = "bg-[#6E24FF] text-white rounded-2xl rounded-tr-none px-4 py-2.5 max-w-[85%] text-xs shadow-sm";
+                    } else if (currentTheme === 'gemini') {
+                        textStyle = "bg-blue-600 text-white rounded-2xl rounded-tr-none px-4 py-2.5 max-w-[85%] text-xs shadow-sm";
+                    }
+                } else {
+                    textStyle = "bg-white text-slate-800 border border-slate-100 rounded-2xl rounded-tl-none px-4 py-2.5 max-w-[90%] text-xs shadow-sm leading-relaxed";
+                    if (currentTheme === 'kanana') {
+                        textStyle = "bg-white text-slate-800 border border-pink-100/50 rounded-2xl rounded-tl-none px-4 py-2.5 max-w-[90%] text-xs shadow-sm leading-relaxed";
+                    } else if (currentTheme === 'gemini') {
+                        textStyle = "bg-white text-slate-800 border border-blue-50/50 rounded-2xl rounded-tl-none px-4 py-2.5 max-w-[90%] text-xs shadow-sm leading-relaxed";
+                    }
+                }
+
+                const bubble = document.createElement('div');
+                bubble.className = textStyle;
+                bubble.innerHTML = msg.text;
+                wrapper.appendChild(bubble);
+
+                if (msg.card) {
+                    const cardWrapper = document.createElement('div');
+                    cardWrapper.className = "max-w-[90%] mt-1";
+                    cardWrapper.innerHTML = msg.card;
+                    wrapper.appendChild(cardWrapper);
+                }
+
+                container.appendChild(wrapper);
+            });
+
+            // Scroll to bottom
+            const feed = document.getElementById('chat-feed');
+            feed.scrollTop = feed.scrollHeight;
+        }
+
+        // Init
+        setTheme('kanana');
+    </script>
+</body>
+</html>
