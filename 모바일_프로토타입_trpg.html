@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soloing Labs TRPG - Zeta-like Mobile Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #050811;
+        }
+        /* Custom dynamic background colors for specific cards and interfaces */
+        .glass-panel {
+            background: rgba(19, 27, 46, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(31, 45, 74, 0.5);
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 229, 255, 0.3);
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen py-10 px-4 text-white">
+
+    <!-- Title and Brand Logo -->
+    <div class="text-center mb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-xs font-semibold mb-3">
+            🪐 Soloing Labs Multi-Agent Ecosystem
+        </div>
+        <h1 class="text-white text-3xl font-extrabold mb-2 tracking-tight">📱 Zeta-like AI TRPG</h1>
+        <p class="text-slate-400 text-sm max-w-lg">피카소(Picasso) 에이전트와 피그마 MCP가 연계 설계한 모바일 화면을<br>직접 클릭하여 대화 및 주사위를 굴려볼 수 있는 인터랙티브 프로토타입입니다.</p>
+    </div>
+
+    <!-- Main Workspace Container -->
+    <div class="flex flex-col lg:flex-row gap-8 items-center justify-center w-full max-w-5xl">
+        
+        <!-- Left Side Controls -->
+        <div class="w-full lg:w-1/3 bg-slate-900/90 p-6 rounded-2xl border border-slate-800 text-white space-y-6">
+            <div>
+                <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-semibold">설계 사양 검증 완료</span>
+                <h3 class="text-xl font-bold mt-3 text-slate-100">AI 모바일 시나리오 엔진</h3>
+                <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                    본 프로토타입은 모바일 스케일 일치화 규격을 100% 준수하여, 실제 터치가 작동하도록 구성되었습니다.
+                </p>
+            </div>
+            
+            <div class="space-y-3">
+                <div class="p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                    <p class="text-xs text-cyan-400 font-bold mb-1">🎮 주사위(RPG Dice) 연동</p>
+                    <p class="text-[11px] text-slate-400">우측 폰 화면 내부 하단의 주사위 아이콘을 클릭하여 실시간 주사위를 굴리고 성공 확률 스탯에 대조할 수 있습니다.</p>
+                </div>
+                <div class="p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                    <p class="text-xs text-green-400 font-bold mb-1">💬 대화형 분기 스크립트</p>
+                    <p class="text-[11px] text-slate-400">액션 칩을 터치하면 상황에 맞는 AI 대사와 결과가 화면에 실시간으로 반영됩니다.</p>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-4 text-[11px] text-slate-500 space-y-1">
+                <p>• <b>UI 디렉팅</b>: Picasso (gpt-5.5-pro)</p>
+                <p>• <b>프로토타이핑 빌드</b>: Codex (gpt-5.5-pro)</p>
+                <p>• <b>브랜드 폰트</b>: Pretendard/KakaoFont</p>
+            </div>
+        </div>
+
+        <!-- Right Side: Widescreen SmartPhone Mockup Frame -->
+        <div class="relative bg-black rounded-[48px] p-4 shadow-2xl border-4 border-slate-800 ring-1 ring-slate-900" style="width: 375px; height: 780px;">
+            
+            <!-- Speaker & Camera Dynamic Island -->
+            <div class="absolute top-6 left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-full z-50 flex items-center justify-between px-3">
+                <div class="w-3 h-3 bg-neutral-900 rounded-full"></div>
+                <div class="w-12 h-1 bg-neutral-800 rounded-full"></div>
+            </div>
+
+            <!-- Mobile Screen -->
+            <div class="w-full h-full rounded-[38px] overflow-hidden flex flex-col relative bg-[#0A0E1A] text-slate-200">
+                
+                <!-- Status Bar -->
+                <div class="h-10 flex items-center justify-between px-6 pt-3 text-[10px] font-semibold z-40 text-slate-400">
+                    <span>Soloing Net</span>
+                    <div class="flex items-center gap-1.5">
+                        <span>5G</span>
+                        <div class="w-5 h-2.5 border border-current rounded-sm p-0.5 flex items-center">
+                            <div class="bg-current h-full w-full rounded-2xs"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Room App Header -->
+                <div class="px-4 py-3 flex items-center justify-between border-b border-slate-800/80 bg-[#111827] z-30">
+                    <div class="flex items-center gap-2">
+                        <span class="text-slate-400 text-sm cursor-pointer hover:text-white">&larr;</span>
+                        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-cyan-500/30 overflow-hidden">
+                            <span class="text-xs">🛡️</span>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-white">성기사 엘레나</p>
+                            <p class="text-[9px] text-green-400">● 실시간 롤플레잉 중</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[10px] text-cyan-400 font-bold">호감도 75%</span>
+                        <div class="w-16 h-1 bg-slate-800 rounded-full mt-1 overflow-hidden">
+                            <div class="bg-cyan-400 h-full w-[75%]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Chat Arena (Scroll Area) -->
+                <div id="chat-arena" class="flex-1 overflow-y-auto p-4 space-y-4 text-xs">
+                    
+                    <!-- System Message -->
+                    <div class="p-2.5 bg-slate-900/80 rounded-lg border border-slate-800/50 text-[10px] text-slate-400 text-center">
+                        🛡️ [ 시스템: 당신은 고대의 잊혀진 신전에 도달했습니다. 어둠 속에서 푸른 안광의 가디언들이 기상합니다. ]
+                    </div>
+
+                    <!-- AI Character Message -->
+                    <div class="flex items-start gap-2">
+                        <div class="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-[10px] flex-shrink-0">🧙‍♀️</div>
+                        <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-2xl rounded-tl-none text-slate-300 max-w-[80%] leading-relaxed">
+                            <p class="font-semibold text-cyan-400 text-[11px] mb-1">엘레나</p>
+                            "조심하세요 파울로! 저들의 기세가 예상보다 강해요. 제가 전방을 방어할 테니, 후방을 맡아주시겠어요?"
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Dialogue Box Placeholder -->
+                    <div id="dynamic-log" class="space-y-4"></div>
+
+                </div>
+
+                <!-- Dice Rolling Interactive Panel (Overlay Alert) -->
+                <div id="dice-overlay" class="hidden absolute inset-0 bg-black/80 z-50 flex flex-col items-center justify-center p-6 text-center">
+                    <div class="bg-slate-900 border border-cyan-500/30 p-6 rounded-2xl max-w-[280px]">
+                        <p class="text-cyan-400 text-xs font-bold mb-2">🎲 RPG D20 주사위 굴리기</p>
+                        <p class="text-[11px] text-slate-400 mb-4">가디언의 방어를 뚫고 주문을 성공시키기 위한 운명의 다이스!</p>
+                        <div id="dice-box" class="w-16 h-16 bg-slate-800 border-2 border-cyan-400 rounded-xl mx-auto flex items-center justify-center text-2xl font-extrabold text-cyan-300 animate-bounce">
+                            20
+                        </div>
+                        <p id="dice-status" class="text-xs mt-4 text-white font-bold">대기 중...</p>
+                        <button onclick="rollDice()" class="mt-4 px-4 py-1.5 bg-cyan-500 text-black text-xs font-bold rounded-lg hover:bg-cyan-400 transition">굴리기</button>
+                        <button onclick="closeDice()" class="mt-2 text-[10px] text-slate-500 hover:text-slate-400 block mx-auto">닫기</button>
+                    </div>
+                </div>
+
+                <!-- Action Button Grid (Thumb-Zone) -->
+                <div class="p-3 bg-[#111827]/90 border-t border-slate-800 space-y-2 z-20">
+                    <p class="text-[9px] text-slate-500 font-bold px-1">현재 실행 가능한 롤플레잉 액션</p>
+                    <div class="grid grid-cols-1 gap-1.5 text-[11px]">
+                        <button onclick="selectAction(1)" class="w-full text-left p-2.5 bg-[#131B2E] hover:bg-[#1C2640] border border-slate-800 hover:border-cyan-500/30 rounded-xl transition text-slate-300 flex items-center gap-2">
+                            <span>⚔️</span> 검을 뽑아 엘레나와 함께 전방 협공
+                        </button>
+                        <button onclick="selectAction(2)" class="w-full text-left p-2.5 bg-[#131B2E] hover:bg-[#1C2640] border border-slate-800 hover:border-cyan-500/30 rounded-xl transition text-slate-300 flex items-center gap-2">
+                            <span>🔮</span> 마법 주사위를 굴려 광역 화염구 캐스팅
+                        </button>
+                        <button onclick="selectAction(3)" class="w-full text-left p-2.5 bg-[#131B2E] hover:bg-[#1C2640] border border-slate-800 hover:border-cyan-500/30 rounded-xl transition text-slate-300 flex items-center gap-2">
+                            <span>👣</span> 은신을 시도하여 사각지대로 침투
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Input Field -->
+                <div class="p-3 pb-6 bg-[#0F1626] border-t border-slate-800 flex items-center gap-2 z-20">
+                    <button onclick="showDice()" class="w-10 h-10 bg-slate-800 border border-cyan-500/30 rounded-xl flex items-center justify-center text-lg shadow-sm hover:bg-slate-700 transition" title="주사위 굴리기">
+                        🎲
+                    </button>
+                    <input id="custom-input" type="text" placeholder="엘레나에게 전술 지시를 직접 입력..." class="flex-1 h-10 bg-slate-900 border border-slate-800 rounded-xl px-3 text-xs text-slate-300 placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition">
+                    <button onclick="sendCustomMessage()" class="w-10 h-10 bg-cyan-500 text-black font-bold rounded-xl flex items-center justify-center hover:bg-cyan-400 transition text-xs">
+                        전송
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripting for Mobile Prototype -->
+    <script>
+        const chatArena = document.getElementById('chat-arena');
+        const dynamicLog = document.getElementById('dynamic-log');
+        const diceOverlay = document.getElementById('dice-overlay');
+        const diceBox = document.getElementById('dice-box');
+        const diceStatus = document.getElementById('dice-status');
+
+        function selectAction(type) {
+            let userMsg = '';
+            let aiReply = '';
+            let avatar = '🧙‍♀️';
+
+            if (type === 1) {
+                userMsg = '⚔️ 검을 뽑아 엘레나와 함께 전방 협공을 가합니다!';
+                aiReply = '엘레나가 당신의 움직임에 맞춰 방패로 방어선을 넓힙니다. "완벽한 타이밍이에요 파울로! 돌파하겠습니다!" 그녀의 검이 가디언의 다리를 베어 정지시킵니다.';
+            } else if (type === 2) {
+                userMsg = '🔮 마법 주사위를 굴려 광역 화염구 주문을 준비합니다.';
+                aiReply = '화염의 주문이 시전되자, 신전 전체가 붉은 안광으로 요동칩니다! "주문 집중을 마칠 때까지 제가 죽음으로 지키겠어요!" 마침내 타오르는 불길이 가디언들을 일시에 타격합니다.';
+            } else if (type === 3) {
+                userMsg = '👣 은신하여 가디언들의 사각지대로 그림자처럼 미끄러집니다.';
+                aiReply = '가디언들이 전방의 엘레나에게 정신이 팔린 사이, 당신은 어둠 속으로 무사히 숨어들어 핵심 코어를 노릴 수 있게 되었습니다. "파울로, 기회는 지금뿐이에요!"';
+            }
+
+            appendMessage('파울로', userMsg, 'user');
+            
+            setTimeout(() => {
+                appendMessage('엘레나', aiReply, 'ai', avatar);
+            }, 800);
+        }
+
+        function appendMessage(sender, text, role, avatar='👤') {
+            const wrapper = document.createElement('div');
+            
+            if (role === 'user') {
+                wrapper.className = 'flex items-start gap-2 justify-end';
+                wrapper.innerHTML = `
+                    <div class="bg-cyan-500 text-black p-3 rounded-2xl rounded-tr-none text-slate-900 max-w-[80%] leading-relaxed">
+                        <p class="font-bold text-[11px] mb-1">파울로</p>
+                        ${text}
+                    </div>
+                `;
+            } else {
+                wrapper.className = 'flex items-start gap-2';
+                wrapper.innerHTML = `
+                    <div class="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-[10px] flex-shrink-0">${avatar}</div>
+                    <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-2xl rounded-tl-none text-slate-300 max-w-[80%] leading-relaxed">
+                        <p class="font-semibold text-cyan-400 text-[11px] mb-1">${sender}</p>
+                        ${text}
+                    </div>
+                `;
+            }
+
+            dynamicLog.appendChild(wrapper);
+            chatArena.scrollTop = chatArena.scrollHeight;
+        }
+
+        function sendCustomMessage() {
+            const input = document.getElementById('custom-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            appendMessage('파울로', text, 'user');
+            input.value = '';
+
+            setTimeout(() => {
+                const aiReplies = [
+                    '진정으로 날카로운 전술이십니다 파울로! 즉시 그 방향으로 방패를 밀치고 활로를 열어보이겠습니다.',
+                    '알겠습니다. 마스터 파울로의 지시에 전장을 무조건 일치시키도록 하겠습니다. 가디언을 그 방향으로 몰아넣겠어요.',
+                    '그 지시를 기다리고 있었습니다! 가디언들의 우측 방어 구역이 매우 허술하군요. 틈을 파고들겠습니다.'
+                ];
+                const randomReply = aiReplies[Math.floor(Math.random() * aiReplies.length)];
+                appendMessage('엘레나', randomReply, 'ai', '🧙‍♀️');
+            }, 1000);
+        }
+
+        function showDice() {
+            diceOverlay.classList.remove('hidden');
+            diceStatus.innerText = '대기 중...';
+            diceBox.innerText = '?';
+        }
+
+        function closeDice() {
+            diceOverlay.classList.add('hidden');
+        }
+
+        function rollDice() {
+            let count = 0;
+            const interval = setInterval(() => {
+                diceBox.innerText = Math.floor(Math.random() * 20) + 1;
+                count++;
+                if (count > 8) {
+                    clearInterval(interval);
+                    const finalVal = Math.floor(Math.random() * 20) + 1;
+                    diceBox.innerText = finalVal;
+                    
+                    if (finalVal >= 15) {
+                        diceStatus.innerText = `성공! (롤값: ${finalVal}) - 주문이 가디언의 방벽을 관통했습니다!`;
+                        setTimeout(() => {
+                            closeDice();
+                            appendMessage('파울로', `🎲 D20 판정 성공! [롤값: ${finalVal}/컷라인: 15]`, 'user');
+                            appendMessage('엘레나', `엄청난 집중력이시네요! 가디언의 방벽이 일순간에 산산조각이 났습니다!`, 'ai', '🧙‍♀️');
+                        }, 1200);
+                    } else {
+                        diceStatus.innerText = `실패... (롤값: ${finalVal}) - 가디언이 공격을 차단했습니다.`;
+                        setTimeout(() => {
+                            closeDice();
+                            appendMessage('파울로', `🎲 D20 판정 실패... [롤값: ${finalVal}/컷라인: 15]`, 'user');
+                            appendMessage('엘레나', `방어선이 단단하네요! 뒤로 물러서서 다음 틈을 노립시다!`, 'ai', '🧙‍♀️');
+                        }, 1200);
+                    }
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>
